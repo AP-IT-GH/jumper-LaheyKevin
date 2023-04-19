@@ -3,7 +3,7 @@ Kevin Lahey, Quinten moons - 2ITIOT
 
 ## Uitleg
 
-Het project bestaat uit de agent en 2 beweegbare balken. Deze balken komen vanuit 2 richtingen op de agent af (x, z). De bedoeling is dat de agent deze balken ontwijkt door te springen.
+Het project bestaat uit de agent en 2 beweegbare balken. Deze balken komen vanuit 2 richtingen op de agent af (x, z). De bedoeling is dat de agent deze balken ontwijkt door te springen. De agent is geplaats in het midden van een kruispunt.
 
 ## Opbouw
 
@@ -15,6 +15,13 @@ Als de agent de obstakels aanraakt zal er ook een afstraffing gebeuren en de epi
 
 ## Training
 
+Op de grafiek is te zien dat er de eerste 100K geen grote sucsessen zijn geboekt. Na de 100K is het linear naar boven gegaan. Hierna hebben de waardes veel geschommelt.
+
+Het eindresultaat is een agent die de obstakels ziet aankomen en optijd springt. Hij springt ook niet zonder dat er een obstakel aankomt.
+
+!(Tensorboard foto)[https://github.com/AP-IT-GH/jumper-LaheyKevin/blob/main/Tensorboard.png]
+
 ## Links
 (Link Github)[https://github.com/AP-IT-GH/jumper-LaheyKevin]
+
 (Link Panopto)[https://ap.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=bfffbd76-5de7-459e-b27b-afe90130b675]
