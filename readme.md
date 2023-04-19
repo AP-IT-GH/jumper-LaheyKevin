@@ -9,13 +9,13 @@ Het project bestaat uit de agent en 2 beweegbare balken. Deze balken komen vanui
 
 De 2 obstakels maken gebruik van een script dat ze laat bewegen in de richting x en z. In de start functie wordt de startlocatie van het obstakel geplaats en een willekeurige snelheid bepaald. In de update functie wordt het obstakel verplaats over zijn as (x, z). Als een obstakel het punt 10 bereikt zal deze de start functie aanroepen. Doordat er 2 obstakels zijn, zijn er ook 2 obstakel scripts (x en z script).
 
-We hebben de kubus een "Ray Perception Sensor 3D" gegeven zodat deze rond zich kan kijken. De kubus zal beloond worden wanneer hij over een balk heen springt. We hebben toegevoegd dat als hij sprint zonder dat dit nodig is er een afstraffing gebeurd. Ook als hij van het platform zou vallen gebeurd er een afstraffing. Om te weten of de kubus over een obstakel is gesprongen maken we gebruik van een raycast. Die naar de onderkant van de cubus kijkt en controleerd of hier een object met tag obstacle voorbijkomt. Als dit het geval is wordt de agent beloond.
+We hebben de kubus een "Ray Perception Sensor 3D" gegeven zodat deze rond zich kan kijken. De kubus zal beloond worden wanneer hij over een balk heen springt. We hebben toegevoegd dat als hij sprint zonder dat dit nodig is er een afstraffing gebeurd. Ook als hij van het platform zou vallen gebeurd er een afstraffing. Om te weten of de kubus over een obstakel is gesprongen maken we gebruik van een raycast. Die naar de onderkant van de kubus kijkt en controleert of hier een object met tag "obstacle" voorbijkomt. Als dit het geval is wordt de agent beloond.
 
-Als de agent de obstakels aanraakt zal er ook een afstraffing gebeuren en de episode opniuew beginnen.
+Als de agent de obstakels aanraakt zal er ook een afstraffing gebeuren en de episode opnieuw beginnen.
 
 ## Training
 
-Op de grafiek is te zien dat er de eerste 100K geen grote sucsessen zijn geboekt. Na de 100K is het linear naar boven gegaan. Hierna hebben de waardes veel geschommelt.
+Op de grafiek is te zien dat er de eerste 100K geen grote successen zijn geboekt. Na de 100K is het linear naar boven gegaan. Hierna hebben de waardes veel geschommeld.
 
 Het eindresultaat is een agent die de obstakels ziet aankomen en optijd springt. Hij springt ook niet zonder dat er een obstakel aankomt.
 
