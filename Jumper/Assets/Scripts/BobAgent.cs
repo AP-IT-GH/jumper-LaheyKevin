@@ -8,54 +8,79 @@ using Unity.MLAgents.Actuators;
 
 public class BobAgent : Agent
 {
-    public Transform Target;
+    //public Transform Target;
+    Rigidbody my_Rigidbody;
+    public float jumpMultiplier = 10;
+    private bool hit = false;
+
+    private void Start()
+    {
+        my_Rigidbody = GetComponent<Rigidbody>();
+        //my_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+    }
+
+    void Update()
+    {
+        RaycastHit ObstacleHit;
+        Ray ObstacleRay = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(ObstacleRay, out ObstacleHit, 5f))
+        {
+            if (ObstacleHit.collider.tag == "Target" && hit == false)
+            {
+                AddReward(2f);
+                hit = true;
+            }
+        }
+    }
+
     public override void OnEpisodeBegin()
     {
         // reset de positie en orientatie als de agent gevallen is
-        if (transform.localPosition.z != 0)
+        if (transform.localPosition.y < 0)
         {
-            transform.localPosition = new Vector3(0, 0.25f, 0);
-            transform.localRotation = Quaternion.identity;
+            my_Rigidbody.angularVelocity = Vector3.zero;
+            my_Rigidbody.velocity = Vector3.zero;
+            transform.localPosition = new Vector3(0, 0.5f, 0);
+            transform.localRotation = new Quaternion(0, -90, 0, 1);
+            SetReward(-2f);
         }
-
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Target enAgent posities
-        //sensor.AddObservation(Target.localPosition);
+        //Agent positie
         sensor.AddObservation(transform.localPosition);
     }
 
-    public float speedMultiplier = 0.1f;
-    public float rotationMultiplier = 5;
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        // Acties, size = 2
+        // Acties, size = 1
         Vector3 controlSignal = Vector3.zero;
-        controlSignal.x = actionBuffers.ContinuousActions[0]; ;
-        transform.Translate(controlSignal * speedMultiplier);
-        transform.Rotate(0.0f, rotationMultiplier * actionBuffers.ContinuousActions[1], 0.0f);
-
-        // Beloningen
-        float distanceToTarget = Vector3.Distance(transform.localPosition, Target.localPosition);
-
-        // target bereikt
-        if (distanceToTarget < 1.42f)
+        controlSignal.y = actionBuffers.ContinuousActions[0];
+        
+        //Als de agent moet springen en op de grond staat
+        if (controlSignal.y == 1 && transform.localPosition.y <= 0.5f)
         {
-            SetReward(1.0f);
+            my_Rigidbody.AddForce(Vector3.up * jumpMultiplier, ForceMode.Impulse);
+            AddReward(-1f);
+        }
+        // Als agent onder de grond is
+        else if (transform.localPosition.y < 0) 
+        {
             EndEpisode();
         }
-        // Van hetplatform gevallen?
-        else if (transform.localPosition.y < 0)
+        //Als agent op de grond staat
+        else if (transform.localPosition.y == 0.5f)
         {
-            EndEpisode();
+            hit = false;  
         }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
+        //Gebruik spatie om te springen
         var continuousActionsOut = actionsOut.ContinuousActions;
+
         if (Input.GetKey(KeyCode.Space))
         {
             continuousActionsOut[0] = 1;
