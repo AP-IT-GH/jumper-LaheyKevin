@@ -27,7 +27,7 @@ public class BobAgent : Agent
         {
             if (ObstacleHit.collider.tag == "Target" && hit == false)
             {
-                AddReward(2f);
+                AddReward(3f);
                 hit = true;
             }
         }
@@ -52,6 +52,14 @@ public class BobAgent : Agent
         sensor.AddObservation(transform.localPosition);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Target")
+        {
+            AddReward(-1f);
+        }
+    }
+
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
         // Acties, size = 1
@@ -65,12 +73,12 @@ public class BobAgent : Agent
             AddReward(-1f);
         }
         // Als agent onder de grond is
-        else if (transform.localPosition.y < 0) 
+        if (transform.localPosition.y < 0) 
         {
             EndEpisode();
         }
         //Als agent op de grond staat
-        else if (transform.localPosition.y == 0.5f)
+        else if (transform.localPosition.y < 0.5f)
         {
             hit = false;  
         }
