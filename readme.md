@@ -19,7 +19,7 @@ Op de grafiek is te zien dat er de eerste 100K geen grote sucsessen zijn geboekt
 
 Het eindresultaat is een agent die de obstakels ziet aankomen en optijd springt. Hij springt ook niet zonder dat er een obstakel aankomt.
 
-!(Tensorboard foto)[https://github.com/AP-IT-GH/jumper-LaheyKevin/blob/main/Tensorboard.png]
+!(Tensorboard foto)[https://github.com/AP-IT-GH/jumper-LaheyKevin/blob/main/Tensorboard.jpg]
 
 ## Links
 (Link Github)[https://github.com/AP-IT-GH/jumper-LaheyKevin]
