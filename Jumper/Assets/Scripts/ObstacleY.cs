@@ -10,7 +10,6 @@ public class ObstacleY : MonoBehaviour
     void Start()
     {
         transform.localPosition = new Vector3(0, 0.5f, -10);
-        transform.localScale = new Vector3(1, 1, 1);
         speed = Random.Range(0.05f, 0.2f);
     }
 
