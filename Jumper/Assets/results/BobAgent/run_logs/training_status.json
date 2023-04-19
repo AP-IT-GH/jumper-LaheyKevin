@@ -2,22 +2,22 @@
     "BobAgent": {
         "checkpoints": [
             {
-                "steps": 300022,
-                "file_path": "results\\BobAgent\\BobAgent\\BobAgent-300022.onnx",
-                "reward": 4.0,
-                "creation_time": 1681905365.358453,
+                "steps": 300031,
+                "file_path": "results\\BobAgent\\BobAgent\\BobAgent-300031.onnx",
+                "reward": null,
+                "creation_time": 1681928590.738939,
                 "auxillary_file_paths": [
-                    "results\\BobAgent\\BobAgent\\BobAgent-300022.pt"
+                    "results\\BobAgent\\BobAgent\\BobAgent-300031.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 300022,
+            "steps": 300031,
             "file_path": "results\\BobAgent\\BobAgent.onnx",
-            "reward": 4.0,
-            "creation_time": 1681905365.358453,
+            "reward": null,
+            "creation_time": 1681928590.738939,
             "auxillary_file_paths": [
-                "results\\BobAgent\\BobAgent\\BobAgent-300022.pt"
+                "results\\BobAgent\\BobAgent\\BobAgent-300031.pt"
             ]
         }
     },

@@ -8,15 +8,15 @@ using Unity.MLAgents.Actuators;
 
 public class BobAgent : Agent
 {
-    //public Transform Target;
     Rigidbody my_Rigidbody;
+
     public float jumpMultiplier = 10;
     private bool hit = false;
+    private bool collide = false;
 
     private void Start()
     {
         my_Rigidbody = GetComponent<Rigidbody>();
-        //my_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     void Update()
@@ -25,7 +25,7 @@ public class BobAgent : Agent
         Ray ObstacleRay = new Ray(transform.position, Vector3.down);
         if (Physics.Raycast(ObstacleRay, out ObstacleHit, 5f))
         {
-            if (ObstacleHit.collider.tag == "Target" && hit == false)
+            if (ObstacleHit.collider.tag == "Target" && !hit)
             {
                 AddReward(3f);
                 hit = true;
@@ -35,15 +35,11 @@ public class BobAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        // reset de positie en orientatie als de agent gevallen is
-        if (transform.localPosition.y < 0)
-        {
-            my_Rigidbody.angularVelocity = Vector3.zero;
-            my_Rigidbody.velocity = Vector3.zero;
-            transform.localPosition = new Vector3(0, 0.5f, 0);
-            transform.localRotation = new Quaternion(0, -90, 0, 1);
-            SetReward(-2f);
-        }
+        my_Rigidbody.angularVelocity = Vector3.zero;
+        my_Rigidbody.velocity = Vector3.zero;
+        transform.localPosition = new Vector3(0, 0.5f, 0);
+        transform.localRotation = new Quaternion(0, -0.92388f, 0, 0.38268f);
+        collide = false;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -56,7 +52,7 @@ public class BobAgent : Agent
     {
         if (collision.collider.tag == "Target")
         {
-            AddReward(-1f);
+            collide = true;
         }
     }
 
@@ -72,9 +68,10 @@ public class BobAgent : Agent
             my_Rigidbody.AddForce(Vector3.up * jumpMultiplier, ForceMode.Impulse);
             AddReward(-1f);
         }
-        // Als agent onder de grond is
-        if (transform.localPosition.y < 0) 
+        // Als agent onder de grond is of een blok aanraakt
+        if (transform.localPosition.y < 0 || collide) 
         {
+            SetReward(-2f);
             EndEpisode();
         }
         //Als agent op de grond staat

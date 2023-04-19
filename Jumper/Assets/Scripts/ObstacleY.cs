@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ObstacleY : MonoBehaviour
 {
-    public float speed;
+    private float speed;
 
     // Start is called before the first frame update
     void Start()
     {
         transform.localPosition = new Vector3(0, 0.5f, -10);
-        transform.localScale = new Vector3(Random.Range(1f, 2), 1, 1);
+        transform.localScale = new Vector3(1, 1, 1);
         speed = Random.Range(0.05f, 0.2f);
     }
 
