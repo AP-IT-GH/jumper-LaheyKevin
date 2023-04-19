@@ -328,10 +328,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72131feb2e72b94e90721a86b429f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AgentX: {fileID: 5281802572186131951, guid: 574a8cfc9d883684bbaf2a855a7e2db8, type: 3}
-  AgentZ: {fileID: 8166922639715692211, guid: 51b3630a395fadc438344c1a05105859, type: 3}
-  spawnRateX: 3
-  spawnRateZ: 3
+  TargetX: {fileID: 5281802572186131951, guid: 574a8cfc9d883684bbaf2a855a7e2db8, type: 3}
+  TargetZ: {fileID: 8166922639715692211, guid: 51b3630a395fadc438344c1a05105859, type: 3}
+  spawnRate: 3
 --- !u!1 &1130561011
 GameObject:
   m_ObjectHideFlags: 0
